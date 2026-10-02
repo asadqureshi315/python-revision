@@ -109,3 +109,14 @@ for num in nums:
 
 print(result)
 
+# Sorted
+users = [
+    ("Asad", 25),
+    ("Ali", 30),
+    ("Sara", 22),
+]
+sort=sorted(users, key=lambda x:x[1], reverse=True)   # Returns a new list
+users.sort(key=lambda x: x[1])   # Mutates original users
+sort=sorted(users, key=lambda x:len(x[0]))  # Get longest name first
+print(sort)
+
