@@ -120,3 +120,91 @@ users.sort(key=lambda x: x[1])   # Mutates original users
 sort=sorted(users, key=lambda x:len(x[0]))  # Get longest name first
 print(sort)
 
+#Lambda here means “create a small anonymous function.”
+lambda x: len(x[0]) 
+# is equivalent to
+def get_name_length(x):
+    return len(x[0])
+# Examples:
+lambda x: x * 2
+lambda x: x[1]
+lambda x: len(x)
+lambda a, b: a + b
+
+# Sorting by age descending then name ascending
+users = [
+    ("Asad", 25),
+    ("Aasad", 25),
+    ("Ali", 30),
+    ("Sara", 22),
+]
+sort=sorted(users, key=lambda x: (-x[1],x[0]))  # (-x[1],x[0]) is the part which help use do multi level sorting, here we are telling it to sort by age and negative age sorted in ascending order gives us age in 
+                                                # descending order and if the age match then the second tuple param i.e. age gets used to sort
+print(sort)
+
+
+# *args and **kwargs
+def greet(name, prefix="Hello"):
+    return f"{prefix}, {name}"
+
+# *args when function can get variable number of position arguments
+def total(*args):
+    print(args)
+    return sum(args)
+
+# **kwargs collects a variable number of keyword arguments.
+def show_user(**kwargs): # Inside the function, kwargs is a dictionary:
+    print(kwargs)
+show_user(name="Asad", age=25, role="developer") 
+print(total(1, 2, 3, 4))
+
+nums = [1, 2, 3] # is nums = [1,2] then we get TypeError because add requires 3 args but we got only 2
+def add(a, b, c):
+    return a + b + c
+# *nums here means unpack the elements of nums into positional arguments
+print(add(*nums))
+
+data = {"name": "Asad", "age": 25}
+def show(name, age):
+    print(name, age)
+# **data is equivalent to show(name=Asad, age=25)
+show(**data)
+
+# Refernce and Mutability
+a = [1, 2, 3]
+b = a
+b.append(4)
+# Both variables reference the same list object, and lists are mutable.
+print(a)
+print(b)
+
+# we assigned b a copy of a so they now both have different array with same value
+a = [1, 2, 3]
+b = a.copy()  # makes a shallow copy
+b.append(4)
+print(a)
+print(b)
+
+# the inner array wont get copied so both a and b will get updated
+a = [[1, 2], [3, 4]]
+b = a.copy()
+b[0].append(99)
+print(a)
+print(b)
+
+# Deepcopy
+import copy
+a = [[1, 2], [3, 4]]
+b = copy.deepcopy(a)
+b[0].append(99)
+print(a)
+print(b)
+
+# a will remain same because int are immutable so python calcs 15 and assignes it to b
+# list, dict, set → mutable
+# int, float, str, tuple → immutable
+a = 10
+b = a
+b += 5
+print(a)
+print(b)
